@@ -31,6 +31,11 @@ jobs:
       run: |
         mkdir -p $GITHUB_WORKSPACE/mlruns
 
+    - name: 📂 Verificar contenido de directorios
+      run: |
+      echo "Contenido de los directorios:"
+      ls -R /home/runner/work/MLOps/MLOps/
+
     - name: 🚀 Ejecutar entrenamiento y registro
       run: |
         set -e  # Detener si falla.
