@@ -13,7 +13,6 @@ RAW_DIR = "data/raw"
 PROCESSED_DIR = "data/processed"
 MODEL_PATH = "model.pkl"
 
-======================
 workspace_dir = os.getenv("GITHUB_WORKSPACE", os.getcwd())
 MLRUNS_URI = os.path.join(workspace_dir, "mlruns")
 os.makedirs(MLRUNS_URI, exist_ok=True)
@@ -35,7 +34,7 @@ else:
     experiment_id = experiment.experiment_id
 
 mlflow.set_experiment(experiment_name)
-======================
+
 print(f"🗃️ MLflow tracking URI configurado en: {MLRUNS_URI}")
 
 # Preparación de datos
