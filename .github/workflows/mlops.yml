@@ -22,14 +22,14 @@ jobs:
       with:
         python-version: '3.10'
 
-    - name: 🧹 Crear directorio mlruns
-      run: |
-        mkdir -p $GITHUB_WORKSPACE/mlruns
-
     - name: 📦 Instalar dependencias
       run: |
         python -m pip install --upgrade pip
         pip install -r requirements.txt
+
+    - name: 🧹 Crear directorio mlruns
+      run: |
+        mkdir -p $GITHUB_WORKSPACE/mlruns
 
     - name: 🚀 Ejecutar entrenamiento y registro
       run: |
