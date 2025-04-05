@@ -22,44 +22,30 @@ workspace_dir = os.getenv("GITHUB_WORKSPACE", os.getcwd())
 # Establecer la ubicación de MLRUNS en el directorio de trabajo
 MLRUNS_URI = os.path.join(workspace_dir, "mlruns")
 
-print(f"🏷️ Ruta problemática => {MLRUNS_URI}")
-
 # Crear el directorio mlruns si no existe
 os.makedirs(MLRUNS_URI, exist_ok=True)
 
-print(f"🏷️ Configurar URI !!")
-
 # Configurar el URI de MLRUNS
 mlflow.set_tracking_uri(MLRUNS_URI)
-
-print(f"🏷️ Variables dinámicas !!")
 
 # Variables dinámicas
 model_name = os.getenv("MODEL_NAME", "MLOPs_model")
 mlflow.set_tracking_uri(MLRUNS_URI)
 mlflow.set_experiment("MLOPs")
 
-print(f"🏷️ Crear dirs si no existen !!")
-
 # Crear directorios si no existen
 os.makedirs(RAW_DIR, exist_ok=True)
 os.makedirs(PROCESSED_DIR, exist_ok=True)
-
-print(f"🏷️ Cargar Dataset !!")
 
 # Cargar dataset
 data = fetch_california_housing(as_frame=True)
 df = data.frame
 df.to_csv(f"{RAW_DIR}/housing_full.csv", index=False)
 
-print(f"🏷️ Dividir datos !!")
-
 # Dividir datos
 X = df.drop(columns=["MedHouseVal"])
 y = df["MedHouseVal"]
 X_train, X_test, y_train, y_test = train_test_split(X, y, test_size=0.2, random_state=42)
-
-print(f"🏷️ Guardar conjuntos !!")
 
 # Guardar conjuntos
 train_df = X_train.copy()
@@ -80,11 +66,17 @@ mse = mean_squared_error(y_test, y_pred)
 mae = mean_absolute_error(y_test, y_pred)
 r2 = r2_score(y_test, y_pred)
 
+print(f"🏷️ Guardar local !!")
+
 # Guardar local
 joblib.dump(model, MODEL_PATH)
 
+print(f"🏷️ Registrar en MLflow !!")
+
 # Registrar en MLflow
 client = MlflowClient()
+
+print(f"🏷️ Antes del with !")
 
 with mlflow.start_run() as run:
     mlflow.log_param("model_type", "LinearRegression")
@@ -92,8 +84,12 @@ with mlflow.start_run() as run:
     mlflow.log_metric("mae", mae)
     mlflow.log_metric("r2", r2)
 
+    print(f"🏷️ Antes del with !")
+
     model_uri = f"runs:/{run.info.run_id}/model"
     mlflow.sklearn.log_model(model, artifact_path="model")
+
+    print(f"🏷️ mlflow.register_model: {model_uri} !")
 
     mv = mlflow.register_model(model_uri=model_uri, name=model_name)
 
