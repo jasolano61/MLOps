@@ -15,7 +15,7 @@ import joblib
 RAW_DIR = "data/raw"
 PROCESSED_DIR = "data/processed"
 MODEL_PATH = "model.pkl"
-MLRUNS_URI = "file:///mlruns"
+MLRUNS_URI = "file:./mlruns"  # 👈 path relativo
 
 # Variables dinámicas
 model_name = os.getenv("MODEL_NAME", "MLOPs_model")
