@@ -33,7 +33,6 @@ jobs:
 
     - name: 📂 Verificar contenido de directorios
       run: |
-      echo "Contenido de los directorios:"
       ls -R /home/runner/work/MLOps/MLOps/
 
     - name: 🚀 Ejecutar entrenamiento y registro
