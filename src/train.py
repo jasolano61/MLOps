@@ -1,3 +1,13 @@
+import os
+import mlflow
+
+workspace_dir = os.getenv("GITHUB_WORKSPACE", os.getcwd())
+MLRUNS_URI = os.path.join(workspace_dir, "mlruns")
+os.makedirs(MLRUNS_URI, exist_ok=True)  # <-- añade esto por seguridad
+mlflow.set_tracking_uri(MLRUNS_URI)
+
+print(f"🗃️ MLflow tracking URI configurado en: {MLRUNS_URI}")
+
 # modificar 0.5 por 0.6 min.
 import os
 import pandas as pd

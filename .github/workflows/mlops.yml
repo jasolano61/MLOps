@@ -36,6 +36,14 @@ jobs:
       run: |
         chmod -R 777 $GITHUB_WORKSPACE/mlruns
 
+    - name: 🗃️ Verificar directorios antes del entrenamiento
+      run: |
+        echo "Directorio actual: $(pwd)"
+        echo "Contenido de workspace:"
+        ls -alh $GITHUB_WORKSPACE
+        echo "Creando mlruns en workspace si no existe"
+        mkdir -p $GITHUB_WORKSPACE/mlruns
+
     - name: 🚀 Ejecutar entrenamiento y registro
       run: |
         set -e  # Detener si falla
