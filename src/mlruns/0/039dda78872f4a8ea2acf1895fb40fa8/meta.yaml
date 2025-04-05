@@ -1,0 +1,15 @@
+artifact_uri: file:///C:/mlops-california-housing/src/mlruns/0/039dda78872f4a8ea2acf1895fb40fa8/artifacts
+end_time: 1743044332171
+entry_point_name: ''
+experiment_id: '0'
+lifecycle_stage: active
+run_id: 039dda78872f4a8ea2acf1895fb40fa8
+run_name: beautiful-fowl-970
+run_uuid: 039dda78872f4a8ea2acf1895fb40fa8
+source_name: ''
+source_type: 4
+source_version: ''
+start_time: 1743044325540
+status: 3
+tags: []
+user_id: jasol

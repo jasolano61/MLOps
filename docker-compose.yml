@@ -1,0 +1,47 @@
+services:
+
+  mlops-api:
+    build: .
+    container_name: mlops-api
+    ports:
+      - "8000:8000"
+    volumes:
+      - ./mlruns:/mlruns
+      - ./data:/data
+    restart: unless-stopped
+    environment:
+      - MODEL_NAME=MLOPs_model  # ✅ Para main.py
+
+  mlflow-ui:
+    image: python:3.10-slim
+    container_name: mlflow-ui
+    working_dir: /app
+    volumes:
+      - ./mlruns:/mlruns
+    command: >
+      sh -c "pip install mlflow && mlflow ui --host 0.0.0.0 --port 5000 --backend-store-uri /mlruns"
+    ports:
+      - "5000:5000"
+    restart: unless-stopped
+
+  retrain:
+    build: .
+    container_name: retrain-script
+    command: python src/train.py
+    volumes:
+      - ./mlruns:/mlruns
+      - ./data:/data
+    environment:
+      - MODEL_NAME=MLOPs_model  # ✅ Para train.py
+
+  prefect-runner:
+    build: .
+    container_name: prefect-runner
+    command: python pipeline.py
+    volumes:
+      - ./mlruns:/mlruns
+      - ./data:/data
+      - .:/app
+    environment:
+      - MODEL_NAME=MLOPs_model
+

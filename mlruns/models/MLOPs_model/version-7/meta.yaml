@@ -1,0 +1,14 @@
+aliases: []
+creation_timestamp: 1743816037831
+current_stage: Archived
+description: null
+last_updated_timestamp: 1743816060683
+name: MLOPs_model
+run_id: 25c552e337854b229a745551faa702a0
+run_link: null
+source: file:///mlruns/572902947056433412/25c552e337854b229a745551faa702a0/artifacts/model
+status: READY
+status_message: null
+storage_location: file:///mlruns/572902947056433412/25c552e337854b229a745551faa702a0/artifacts/model
+user_id: null
+version: 7

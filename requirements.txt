@@ -1,0 +1,6 @@
+fastapi
+mlflow>=2.9.0,<3.0.0
+pandas
+scikit-learn
+numpy
+prefect
