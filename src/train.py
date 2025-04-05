@@ -18,12 +18,12 @@ workspace_dir = os.getenv("GITHUB_WORKSPACE", os.getcwd())
 MLRUNS_URI = os.path.join(workspace_dir, "mlruns")
 os.makedirs(MLRUNS_URI, exist_ok=True)
 
-# ✅ Establecer claramente el tracking URI
+# Establecer tracking URI claramente
 mlflow.set_tracking_uri(MLRUNS_URI)
 client = MlflowClient(tracking_uri=MLRUNS_URI)
 
-# Experimento
-mlflow.set_experiment("MLOPs")
+# Experimento con ubicación explícita de artefactos
+mlflow.set_experiment("MLOPs", artifact_location=MLRUNS_URI)
 
 print(f"🗃️ MLflow tracking URI configurado en: {MLRUNS_URI}")
 
