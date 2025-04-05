@@ -89,7 +89,7 @@ with mlflow.start_run() as run:
     mlflow.log_metric("r2", r2)
     model_uri = f"runs:/{run.info.run_id}/model"
 
-    print(f"🏷️ Antes mlflow.sklearn.log_model: {}")
+    print(f"🏷️ Antes mlflow.sklearn.log_model: {model_uri}")
 
     mlflow.sklearn.log_model(model, artifact_path="models")
 
