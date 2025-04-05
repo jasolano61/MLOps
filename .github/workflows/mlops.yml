@@ -33,8 +33,7 @@ jobs:
         python src/train.py
 
     - name: 📤 Guardar artefactos del modelo (opcional)
-      if: success()
-      uses: actions/upload-artifact@v3
+      uses: actions/upload-artifact@v4
       with:
         name: modelo-entrenado
         path: model.pkl
