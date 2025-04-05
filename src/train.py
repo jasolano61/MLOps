@@ -27,8 +27,6 @@ os.makedirs(MLRUNS_URI, exist_ok=True)
 model_name = os.getenv("MODEL_NAME", "MLOPs_model")
 mlflow.set_tracking_uri(f"file://{MLRUNS_URI}")
 
-print(f"🗃️ MLflow tracking URI configurado en: {MLRUNS_URI}")
-
 # Verificar y crear experimento si no existe
 client = MlflowClient()
 experiment = client.get_experiment_by_name("MLOPs")
@@ -56,23 +54,19 @@ train_df["MedHouseVal"] = y_train
 train_df.to_csv(f"{PROCESSED_DIR}/train.csv", index=False)
 
 # Entrenar modelo
-print("🏷️ Entrenar modelo !!")
 model = LinearRegression()
 model.fit(X_train, y_train)
 
 # Evaluar modelo
-print("🏷️ Evaluar modelo !!")
 y_pred = model.predict(X_test)
 mse = mean_squared_error(y_test, y_pred)
 mae = mean_absolute_error(y_test, y_pred)
 r2 = r2_score(y_test, y_pred)
 
 # Guardar modelo localmente
-print("🏷️ Guardar local !!")
 joblib.dump(model, MODEL_PATH)
 
 # Registrar modelo en MLflow
-print("🏷️ Registrar en MLflow !!")
 
 with mlflow.start_run(experiment_id=experiment_id) as run:
     mlflow.log_param("model_type", "LinearRegression")
@@ -90,6 +84,8 @@ with mlflow.start_run(experiment_id=experiment_id) as run:
     client.set_model_version_tag(model_name, mv.version, "validation_status", "passed")
     client.set_model_version_tag(model_name, mv.version, "author", "JASQ")
     client.set_model_version_tag(model_name, mv.version, "score", f"{r2:.4f}")
+
+    print("🏷️ Antes de if r2 . . .")
 
     if r2 > 0.5:
         client.transition_model_version_stage(
