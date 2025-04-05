@@ -1,4 +1,4 @@
-# modificar 0.5 por 0.6 min
+# modificar 0.5 por 0.6 min.
 import os
 import pandas as pd
 import numpy as np
