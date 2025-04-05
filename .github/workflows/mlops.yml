@@ -1,0 +1,40 @@
+name: Entrenamiento automático MLOps
+
+on:
+  push:
+    paths:
+      - '**.py'
+      - 'Dockerfile'
+      - 'requirements.txt'
+      - 'data/**'
+      - 'mlruns/**'
+
+jobs:
+  train:
+    runs-on: ubuntu-latest
+
+    steps:
+    - name: 📥 Clonar repositorio
+      uses: actions/checkout@v3
+
+    - name: 🐍 Configurar Python
+      uses: actions/setup-python@v4
+      with:
+        python-version: '3.10'
+
+    - name: 📦 Instalar dependencias
+      run: |
+        python -m pip install --upgrade pip
+        pip install -r requirements.txt
+
+    - name: 🚀 Ejecutar entrenamiento y registro
+      run: |
+        set -e  # Detener si falla
+        python src/train.py
+
+    - name: 📤 Guardar artefactos del modelo (opcional)
+      if: success()
+      uses: actions/upload-artifact@v4
+      with:
+        name: modelo-entrenado
+        path: model.pkl
