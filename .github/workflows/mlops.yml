@@ -33,13 +33,14 @@ jobs:
 
     - name: 📂 Verificar contenido de directorios
       run: |
-      ls -alh $GITHUB_WORKSPACE
-      ls -alh $GITHUB_WORKSPACE/mlruns
-      ls -R /home/runner/work/MLOps/MLOps/
+        echo "Verificando contenido del directorio de trabajo..."
+        ls -alh $GITHUB_WORKSPACE
+        echo "Contenido de mlruns:"
+        ls -alh $GITHUB_WORKSPACE/mlruns
 
     - name: 🚀 Ejecutar entrenamiento y registro
       run: |
-        set -e  # Detener si falla.
+        set -e  # Detener si falla
         python src/train.py
 
     - name: 📤 Guardar artefactos del modelo (opcional)
