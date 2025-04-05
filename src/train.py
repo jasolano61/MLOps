@@ -13,24 +13,25 @@ RAW_DIR = "data/raw"
 PROCESSED_DIR = "data/processed"
 MODEL_PATH = "model.pkl"
 
+
 workspace_dir = os.getenv("GITHUB_WORKSPACE", os.getcwd())
 MLRUNS_URI = os.path.join(workspace_dir, "mlruns")
+
 os.makedirs(MLRUNS_URI, exist_ok=True)
 
-mlflow.set_tracking_uri(MLRUNS_URI)
-client = MlflowClient(tracking_uri=MLRUNS_URI)
+# Fuerza explícitamente la ruta absoluta para MLflow
+mlflow.set_tracking_uri(f"file://{MLRUNS_URI}")
+client = MlflowClient(tracking_uri=f"file://{MLRUNS_URI}")
 
-# Crear experimento con ubicación explícita de artefactos (si no existe ya)
+# Crear experimento con ubicación explícita de artefactos
 experiment_name = "MLOPs"
-
-# Comprobar existencia del experimento
 experiment = client.get_experiment_by_name(experiment_name)
 
 if experiment is None:
-    print(f"✅ Experimento '{experiment_name}' no existe, creando uno nuevo.")
+    print(f"✅ Creando nuevo experimento '{experiment_name}' en: {MLRUNS_URI}")
     experiment_id = client.create_experiment(experiment_name, artifact_location=MLRUNS_URI)
 else:
-    print(f"🔄 Experimento '{experiment_name}' encontrado.")
+    print(f"🔄 Usando experimento '{experiment_name}' ya existente.")
     experiment_id = experiment.experiment_id
 
 mlflow.set_experiment(experiment_name)
