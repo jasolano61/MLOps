@@ -27,27 +27,39 @@ print(f"🏷️ Ruta problemática => {MLRUNS_URI}")
 # Crear el directorio mlruns si no existe
 os.makedirs(MLRUNS_URI, exist_ok=True)
 
+print(f"🏷️ Configurar URI !!")
+
 # Configurar el URI de MLRUNS
 mlflow.set_tracking_uri(MLRUNS_URI)
+
+print(f"🏷️ Variables dinámicas !!")
 
 # Variables dinámicas
 model_name = os.getenv("MODEL_NAME", "MLOPs_model")
 mlflow.set_tracking_uri(MLRUNS_URI)
 mlflow.set_experiment("MLOPs")
 
+print(f"🏷️ Crear dirs si no existen !!")
+
 # Crear directorios si no existen
 os.makedirs(RAW_DIR, exist_ok=True)
 os.makedirs(PROCESSED_DIR, exist_ok=True)
+
+print(f"🏷️ Cargar Dataset !!")
 
 # Cargar dataset
 data = fetch_california_housing(as_frame=True)
 df = data.frame
 df.to_csv(f"{RAW_DIR}/housing_full.csv", index=False)
 
+print(f"🏷️ Dividir datos !!")
+
 # Dividir datos
 X = df.drop(columns=["MedHouseVal"])
 y = df["MedHouseVal"]
 X_train, X_test, y_train, y_test = train_test_split(X, y, test_size=0.2, random_state=42)
+
+print(f"🏷️ Guardar conjuntos !!")
 
 # Guardar conjuntos
 train_df = X_train.copy()
