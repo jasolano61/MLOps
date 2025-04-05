@@ -22,6 +22,8 @@ workspace_dir = os.getenv("GITHUB_WORKSPACE", os.getcwd())
 # Establecer la ubicación de MLRUNS en el directorio de trabajo
 MLRUNS_URI = os.path.join(workspace_dir, "mlruns")
 
+print(f"🏷️ Ruta problemática: {MLRUNS_URI}")
+
 # Crear el directorio mlruns si no existe
 os.makedirs(MLRUNS_URI, exist_ok=True)
 
