@@ -31,13 +31,6 @@ jobs:
       run: |
         mkdir -p $GITHUB_WORKSPACE/mlruns
 
-    - name: 📂 Verificar contenido de directorios
-      run: |
-        echo "Verificando contenido del directorio de trabajo..."
-        ls -alh $GITHUB_WORKSPACE
-        echo "Contenido de mlruns::"
-        ls -alh $GITHUB_WORKSPACE/mlruns
-
     - name: 🚀 Ejecutar entrenamiento y registro
       run: |
         set -e  # Detener si falla
