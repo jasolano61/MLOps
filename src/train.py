@@ -91,7 +91,7 @@ with mlflow.start_run() as run:
 
     print(f"🏷️ Antes mlflow.sklearn.log_model: {model_uri}")
 
-    mlflow.sklearn.log_model(model, artifact_path="models")
+    mlflow.sklearn.log_model(model, artifact_path="model")
 
     print(f"🏷️ mlflow.register_model: {model_uri} !")
 
