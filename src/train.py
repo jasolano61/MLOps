@@ -22,8 +22,8 @@ from mlflow.tracking import MlflowClient
 import joblib
 
 # Asegúrate de tener configurada la URI de MLRUNS
-MLRUNS_URI = os.getenv("MLFLOW_TRACKING_URI", "file:///mlruns")  # Usar URI local para ejemplos simples
-mlflow.set_tracking_uri(MLRUNS_URI)
+# MLRUNS_URI = os.getenv("MLFLOW_TRACKING_URI", "file:///mlruns")  # Usar URI local para ejemplos simples
+# mlflow.set_tracking_uri(MLRUNS_URI)
 
 # Configurar rutas
 RAW_DIR = "data/raw"
