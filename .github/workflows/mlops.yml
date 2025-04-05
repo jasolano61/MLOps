@@ -33,6 +33,8 @@ jobs:
 
     - name: 📂 Verificar contenido de directorios
       run: |
+      ls -alh $GITHUB_WORKSPACE
+      ls -alh $GITHUB_WORKSPACE/mlruns
       ls -R /home/runner/work/MLOps/MLOps/
 
     - name: 🚀 Ejecutar entrenamiento y registro
