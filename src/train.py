@@ -13,18 +13,29 @@ RAW_DIR = "data/raw"
 PROCESSED_DIR = "data/processed"
 MODEL_PATH = "model.pkl"
 
-# Configuración dinámica MLflow
+======================
 workspace_dir = os.getenv("GITHUB_WORKSPACE", os.getcwd())
 MLRUNS_URI = os.path.join(workspace_dir, "mlruns")
 os.makedirs(MLRUNS_URI, exist_ok=True)
 
-# Establecer tracking URI claramente
 mlflow.set_tracking_uri(MLRUNS_URI)
 client = MlflowClient(tracking_uri=MLRUNS_URI)
 
-# Experimento con ubicación explícita de artefactos
-mlflow.set_experiment("MLOPs", artifact_location=MLRUNS_URI)
+# Crear experimento con ubicación explícita de artefactos (si no existe ya)
+experiment_name = "MLOPs"
 
+# Comprobar existencia del experimento
+experiment = client.get_experiment_by_name(experiment_name)
+
+if experiment is None:
+    print(f"✅ Experimento '{experiment_name}' no existe, creando uno nuevo.")
+    experiment_id = client.create_experiment(experiment_name, artifact_location=MLRUNS_URI)
+else:
+    print(f"🔄 Experimento '{experiment_name}' encontrado.")
+    experiment_id = experiment.experiment_id
+
+mlflow.set_experiment(experiment_name)
+======================
 print(f"🗃️ MLflow tracking URI configurado en: {MLRUNS_URI}")
 
 # Preparación de datos
