@@ -11,6 +11,10 @@ import mlflow.sklearn
 from mlflow.tracking import MlflowClient
 import joblib
 
+# Asegúrate de tener configurada la URI de MLRUNS
+MLRUNS_URI = os.getenv("MLFLOW_TRACKING_URI", "file:///mlruns")  # Usar URI local para ejemplos simples
+mlflow.set_tracking_uri(MLRUNS_URI)
+
 # Configurar rutas
 RAW_DIR = "data/raw"
 PROCESSED_DIR = "data/processed"
@@ -89,7 +93,7 @@ with mlflow.start_run() as run:
     mlflow.log_metric("r2", r2)
     model_uri = f"runs:/{run.info.run_id}/model"
 
-    print(f"🏷️ Antes mlflow.sklearn.log_model: {model_uri}")
+    print(f"🏷️ Antes mlflow.sklearn.log_model(model, artifact_path="model")")
 
     mlflow.sklearn.log_model(model, artifact_path="model")
 
