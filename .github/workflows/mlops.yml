@@ -29,7 +29,6 @@ jobs:
 
     - name: 🚀 Ejecutar entrenamiento y registro
       run: |
-        set -e  # Detener si falla
         python src/train.py
 
     - name: 📤 Guardar artefactos del modelo (opcional)
