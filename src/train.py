@@ -1,3 +1,4 @@
+# cuando este estable hay que subir de 0.5 a 0.6 o mas
 import os
 import pandas as pd
 import numpy as np
