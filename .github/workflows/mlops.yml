@@ -34,7 +34,7 @@ jobs:
 
     - name: 📤 Guardar artefactos del modelo (opcional)
       if: success()
-      uses: actions/upload-artifact@v4
+      uses: actions /upload-artifact@v4
       with:
         name: modelo-entrenado
         path: model.pkl
