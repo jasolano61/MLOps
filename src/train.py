@@ -15,7 +15,18 @@ import joblib
 RAW_DIR = "data/raw"
 PROCESSED_DIR = "data/processed"
 MODEL_PATH = "model.pkl"
-MLRUNS_URI = os.path.join(os.getcwd(), "mlruns")
+
+# Obtener el directorio de trabajo de GitHub Actions
+workspace_dir = os.getenv("GITHUB_WORKSPACE", os.getcwd())
+
+# Establecer la ubicación de MLRUNS en el directorio de trabajo
+MLRUNS_URI = os.path.join(workspace_dir, "mlruns")
+
+# Crear el directorio mlruns si no existe
+os.makedirs(MLRUNS_URI, exist_ok=True)
+
+# Configurar el URI de MLRUNS
+mlflow.set_tracking_uri(MLRUNS_URI)
 
 # Variables dinámicas
 model_name = os.getenv("MODEL_NAME", "MLOPs_model")

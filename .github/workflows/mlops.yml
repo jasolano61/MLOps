@@ -27,6 +27,10 @@ jobs:
         python -m pip install --upgrade pip
         pip install -r requirements.txt
 
+    - name: 🧹 Crear directorio mlruns
+      run: |
+        mkdir -p $GITHUB_WORKSPACE/mlruns
+
     - name: 🚀 Ejecutar entrenamiento y registro
       run: |
         set -e  # Detener si falla
