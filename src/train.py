@@ -56,9 +56,13 @@ test_df = X_test.copy()
 test_df["MedHouseVal"] = y_test
 test_df.to_csv(f"{PROCESSED_DIR}/test.csv", index=False)
 
+print(f"🏷️ Entrenar modelo !!")
+
 # Entrenar modelo
 model = LinearRegression()
 model.fit(X_train, y_train)
+
+print(f"🏷️ Evaluar modelo !!")
 
 # Evaluar modelo
 y_pred = model.predict(X_test)
