@@ -80,16 +80,24 @@ with mlflow.start_run() as run:
     mlflow.log_metric("mae", mae)
     mlflow.log_metric("r2", r2)
 
+    print("🏷️ mlflow.sklearn.log_model!!")
+
     # ✅ Especificar modelo con ruta clara
     mlflow.sklearn.log_model(model, artifact_path="model", registered_model_name="MLOPs_model")
 
+    print('🏷️ model_uri = f"runs:/{run.info.run_id}/model"!!')
+
     model_uri = f"runs:/{run.info.run_id}/model"
     mv = mlflow.register_model(model_uri=model_uri, name="MLOPs_model")
+
+    print('🏷️ model_uri = client.set_registered_model_alias!!')
 
     client.set_registered_model_alias("MLOPs_model", "champion", mv.version)
     client.set_model_version_tag("MLOPs_model", mv.version, "validation_status", "passed")
     client.set_model_version_tag("MLOPs_model", mv.version, "author", "JASQ")
     client.set_model_version_tag("MLOPs_model", mv.version, "score", f"{r2:.4f}")
+
+    print('🏷️ if r2 > 0.5:!!')
 
     if r2 > 0.5:
         client.transition_model_version_stage(
