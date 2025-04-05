@@ -31,6 +31,7 @@ jobs:
       run: |
         python src/train.py
 
+# 🔄 Versión actualizada de upload-artifact
     - name: 📤 Guardar artefactos del modelo (opcional)
       uses: actions/upload-artifact@v4
       with:
