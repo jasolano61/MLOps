@@ -1,0 +1,15 @@
+artifact_uri: /app/mlruns/624824063121226883/c421ecf12a0342c4bc0f74ded46cebde/artifacts
+end_time: 1743948600552
+entry_point_name: ''
+experiment_id: '624824063121226883'
+lifecycle_stage: active
+run_id: c421ecf12a0342c4bc0f74ded46cebde
+run_name: intrigued-eel-120
+run_uuid: c421ecf12a0342c4bc0f74ded46cebde
+source_name: ''
+source_type: 4
+source_version: ''
+start_time: 1743948595263
+status: 3
+tags: []
+user_id: root

@@ -1,0 +1,15 @@
+artifact_uri: /app/mlruns/624824063121226883/9a645e33daab415a93e74db787476073/artifacts
+end_time: 1743947748572
+entry_point_name: ''
+experiment_id: '624824063121226883'
+lifecycle_stage: active
+run_id: 9a645e33daab415a93e74db787476073
+run_name: indecisive-asp-302
+run_uuid: 9a645e33daab415a93e74db787476073
+source_name: ''
+source_type: 4
+source_version: ''
+start_time: 1743947743765
+status: 3
+tags: []
+user_id: root
